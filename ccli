@@ -19,10 +19,10 @@
 ##?      --help             Show help options.
 ##?      --version          Print program version.
 ##?      --cheat            Use cheat.
-##?      --seed <value>     Randomisation seed value. [default: 0]
-##?      --type <name>      Algorithm type. [default: simple]
-##?      --ordering <name>  Vertex ordering. [default: inorder]
 ##?      --kempe            Use Kempe chains.
+##?      --ordering=<name>  Vertex ordering. [default: inorder]
+##?      --seed=<value>     Randomisation seed value. [default: 0]
+##?      --type=<name>      Algorithm type. [default: simple]
 
 greedy=./bin/greedy.exp
 
@@ -39,12 +39,43 @@ if ${args[dsatur]} ; then
     echo "DSATUR Algorithm."
 fi
 
+if ${args[--cheat]}; then
+  CHEAT=1
+else
+  CHEAT=0
+fi
+
+if ${args[--kempe]}; then
+ KEMPE="y"
+else
+ KEMPE="n"
+fi
+
+ORDERING_S=${args[--ordering]}
+case $ORDERING_S in
+ inorder) ORDERING=1 ;;
+ random) ORDERING=2 ;;
+ decdeg) ORDERING=3 ;;
+ incdeg) ORDERING=4 ;;
+ lbfsr) ORDERING=5 ;;
+ lbfsd) ORDERING=6 ;;
+ lbfsi) ORDERING=7 ;;
+ *) ORDERING=1 ;;
+esac
+
+TYPE_S=${args[--type]}
+case $TYPE_S in
+ simple) TYPE=1 ;;
+ large) TYPE=2 ;;
+ small) TYPE=3 ;;
+ random) TYPE=4 ;;
+ reverse) TYPE=5 ;;
+ stir) TYPE=6 ;;
+ *) TYPE=1 ;;
+esac
+
 if ${args[greedy]} ; then
-    echo ${args[--cheat]}
-    echo ${args[--kempe]}
-    echo ${args[--type]}
-    echo ${args[--ordering]}
-#    $greedy ${args[<file>,0]}
+     $greedy ${args[<file>,0]} $CHEAT $KEMPE $ORDERING ${args[--seed]} $TYPE
 fi
 
 if ${args[itrgrdy]} ; then

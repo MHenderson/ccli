@@ -43,18 +43,24 @@ if {$force_conservative} {
 
 
 set timeout -1
-spawn greedy [lindex $argv 0]
+set path [lindex $argv 0]
+set cheat [lindex $argv 1]
+set kempe [lindex $argv 2]
+set ordering [lindex $argv 3]
+set seed [lindex $argv 4]
+set type [lindex $argv 5]
+spawn greedy $path
 match_max 100000
 expect -exact ""
-send -- "0\r"
+send -- "$cheat\r"
 expect -exact "Enter seed for search randomization: "
-send -- "1\r"
+send -- "$seed\r"
 expect -exact "Which for this program "
 send -- "0"
 expect -exact " "
-send -- "1\r"
+send -- "$type\r"
 expect -exact "Using: "
-send -- "1\r"
+send -- "$ordering\r"
 expect -exact "Use kempe reductions y/n "
-send -- "n\r"
+send -- "$kempe\r"
 expect eof
