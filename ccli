@@ -1,0 +1,35 @@
+#!/bin/bash
+#? ccli 0.1.0
+#? Copyright (C) 2014 Matthew Henderson
+#? License MIT
+#? This is free software: you are free to change and redistribute it.
+#? There is NO WARRANTY, to the extent permitted by law.
+
+##? Usage: ccli [options] <argv>...
+##?
+##? Options:
+##?       --help      Show help options.
+##?       --version   Print program version.
+##?       --algorithm Choose algorithm.
+
+help=$(grep "^##?" "$0" | cut -c 5-)
+version=$(grep "^#?"  "$0" | cut -c 4-)
+
+eval "$(docopts -A args -h "$help" : "$@")"
+
+if ${args[subcommand]} ; then
+    echo "subcommand was given"
+fi
+
+if [ -n "${args[--long-option-with-argument]}" ] ; then
+    echo "${args[--long-option-with-argument]}"
+else
+    echo "--long-option-with-argument was not given"
+fi
+
+i=0
+while [[ $i -lt ${args[<argument-with-multiple-values>,#]} ]] ; do
+    echo "${args[<argument-with-multiple-values>,$i]}"
+    i=$[$i+1]
+done
+
