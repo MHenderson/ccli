@@ -16,8 +16,13 @@
 ##?      ccli --version
 ##?
 ##? Options:
-##?      --help      Show help options.
-##?      --version   Print program version.
+##?      --help             Show help options.
+##?      --version          Print program version.
+##?      --cheat            Use cheat.
+##?      --seed <value>     Randomisation seed value. [default: 0]
+##?      --type <name>      Algorithm type. [default: simple]
+##?      --ordering <name>  Vertex ordering. [default: inorder]
+##?      --kempe            Use Kempe chains.
 
 greedy=./bin/greedy.exp
 
@@ -35,7 +40,11 @@ if ${args[dsatur]} ; then
 fi
 
 if ${args[greedy]} ; then
-    $greedy ${args[<file>,0]}
+    echo ${args[--cheat]}
+    echo ${args[--kempe]}
+    echo ${args[--type]}
+    echo ${args[--ordering]}
+#    $greedy ${args[<file>,0]}
 fi
 
 if ${args[itrgrdy]} ; then
