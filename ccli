@@ -6,18 +6,18 @@
 #? There is NO WARRANTY, to the extent permitted by law.
 
 ##? Usage: ccli [options] <argv>...
-##?
+##?        ccli -h | --help
+##?        ccli --version
 ##? Options:
 ##?       --help      Show help options.
 ##?       --version   Print program version.
-##?       --algorithm Choose algorithm.
 
 help=$(grep "^##?" "$0" | cut -c 5-)
 version=$(grep "^#?"  "$0" | cut -c 4-)
 
-eval "$(docopts -A args -h "$help" : "$@")"
+eval "$(docopts -A args -h "$help" -V "$version" : "$@")"
 
-if ${args[subcommand]} ; then
+if ${args[--algorithm]} ; then
     echo "subcommand was given"
 fi
 
