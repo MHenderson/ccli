@@ -43,7 +43,7 @@ if {$force_conservative} {
 
 
 set timeout -1
-spawn greedy /home/matthew/workspace/graphs-collection/src/Classic/Chvatal/chvatal.dimacs
+spawn greedy [lindex $argv 0]
 match_max 100000
 expect -exact ""
 send -- "0\r"

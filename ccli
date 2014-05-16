@@ -5,31 +5,48 @@
 #? This is free software: you are free to change and redistribute it.
 #? There is NO WARRANTY, to the extent permitted by law.
 
-##? Usage: ccli [options] <argv>...
-##?        ccli -h | --help
-##?        ccli --version
+##? Usage:
+##?      ccli bktdsat [options]  [--] <file>...
+##?      ccli dsatur [options] [--] <file>...
+##?      ccli greedy [options] [--] <file>...
+##?      ccli itrgrdy [options] [--] <file>...
+##?      ccli maxis [options] [--] <file>...
+##?      ccli tabu [options] [--] <file>...
+##?      ccli -h | --help
+##?      ccli --version
+##?
 ##? Options:
-##?       --help      Show help options.
-##?       --version   Print program version.
+##?      --help      Show help options.
+##?      --version   Print program version.
+
+greedy=./bin/greedy.exp
 
 help=$(grep "^##?" "$0" | cut -c 5-)
 version=$(grep "^#?"  "$0" | cut -c 4-)
 
 eval "$(docopts -A args -h "$help" -V "$version" : "$@")"
 
-if ${args[--algorithm]} ; then
-    echo "subcommand was given"
+if ${args[bktdsat]} ; then
+    echo "BKTDSAT Algorithm."
 fi
 
-if [ -n "${args[--long-option-with-argument]}" ] ; then
-    echo "${args[--long-option-with-argument]}"
-else
-    echo "--long-option-with-argument was not given"
+if ${args[dsatur]} ; then
+    echo "DSATUR Algorithm."
 fi
 
-i=0
-while [[ $i -lt ${args[<argument-with-multiple-values>,#]} ]] ; do
-    echo "${args[<argument-with-multiple-values>,$i]}"
-    i=$[$i+1]
-done
+if ${args[greedy]} ; then
+    $greedy ${args[<file>,0]}
+fi
+
+if ${args[itrgrdy]} ; then
+    echo "ITRGRDY Algorithm."
+fi
+
+if ${args[maxis]} ; then
+    echo "Maxis Algorithm."
+fi
+
+if ${args[tabu]} ; then
+    echo "Tabu Algorithm."
+fi
 
