@@ -26,6 +26,7 @@
 
 greedy=./bin/greedy.exp
 dsatur=./bin/dsatur.exp
+maxis=./bin/maxis.exp
 
 help=$(grep "^##?" "$0" | cut -c 5-)
 version=$(grep "^#?"  "$0" | cut -c 4-)
@@ -84,7 +85,7 @@ if ${args[itrgrdy]} ; then
 fi
 
 if ${args[maxis]} ; then
-    echo "Maxis Algorithm."
+     $maxis ${args[<file>,0]} $CHEAT ${args[--seed]}
 fi
 
 if ${args[tabu]} ; then
