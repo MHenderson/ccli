@@ -25,19 +25,12 @@
 ##?      --type=<name>      Algorithm type. [default: simple]
 
 greedy=./bin/greedy.exp
+dsatur=./bin/dsatur.exp
 
 help=$(grep "^##?" "$0" | cut -c 5-)
 version=$(grep "^#?"  "$0" | cut -c 4-)
 
 eval "$(docopts -A args -h "$help" -V "$version" : "$@")"
-
-if ${args[bktdsat]} ; then
-    echo "BKTDSAT Algorithm."
-fi
-
-if ${args[dsatur]} ; then
-    echo "DSATUR Algorithm."
-fi
 
 if ${args[--cheat]}; then
   CHEAT=1
@@ -73,6 +66,14 @@ case $TYPE_S in
  stir) TYPE=6 ;;
  *) TYPE=1 ;;
 esac
+
+if ${args[bktdsat]} ; then
+    echo "BKTDSAT Algorithm."
+fi
+
+if ${args[dsatur]} ; then
+     $dsatur ${args[<file>,0]} $CHEAT $ORDERING ${args[--seed]}
+fi
 
 if ${args[greedy]} ; then
      $greedy ${args[<file>,0]} $CHEAT $KEMPE $ORDERING ${args[--seed]} $TYPE
