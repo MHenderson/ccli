@@ -24,9 +24,9 @@
 ##?      --seed=<value>     Randomisation seed value. [default: 0]
 ##?      --type=<name>      Algorithm type. [default: simple]
 
-greedy=./bin/greedy.exp
-dsatur=./bin/dsatur.exp
-maxis=./bin/maxis.exp
+greedy=/home/matthew/workspace/ccli/bin/greedy.exp
+dsatur=/home/matthew/workspace/ccli/bin/dsatur.exp
+maxis=/home/matthew/workspace/ccli/bin/maxis.exp
 
 help=$(grep "^##?" "$0" | cut -c 5-)
 version=$(grep "^#?"  "$0" | cut -c 4-)
