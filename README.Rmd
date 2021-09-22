@@ -1,0 +1,104 @@
+---
+title: "ccli"
+author: "Matthew Henderson"
+date: "22/09/2021"
+output:
+  github_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+A command-line interface for Culberson's colouring programs.
+
+Requirements
+------------
+
+To use the expect scripts directly
+(see the Appendix)
+requires
+
+* Expect (http://expect.sourceforge.net/)
+
+```
+apt-get install expect
+```
+
+and
+
+* Culberson's Coloring Programs (http://webdocs.cs.ualberta.ca/~joe/Coloring/Colorsrc/index.html)
+
+Using ccli also requires:
+
+* Bash >= 4.0
+* Docopts (https://github.com/docopt/docopts)
+
+```
+cd /opt
+git clone https://github.com/docopt/docopts.git
+./get_docopts.sh
+cp docopts /usr/local/bin
+```
+
+## ccli
+
+### greedy
+
+```{sh}
+export PATH=$PATH:.
+
+ccli greedy --type="simple"\
+            --ordering="decdeg"\
+            --seed=42\
+            --kempe\
+            ../queen-colouring/queen16_16.col
+```
+
+### dsatur
+
+```{sh}
+export PATH=$PATH:.
+
+ccli dsatur --ordering="random"\
+            --seed=42\
+            ../queen-colouring/queen16_16.col
+```
+
+### maxis
+
+```{sh}
+export PATH=$PATH:.
+
+ccli maxis --seed=42\
+           ../queen-colouring/queen16_16.col
+```
+
+## Appendix
+
+You can use each of the scripts individually. They have a very
+different interface to ccli. These programs are all generated
+by autoexpect.
+
+### ccli_greedy
+
+```{sh}
+./lib/ccli_greedy ../queen-colouring/queen16_16.col 1 y 1 42 1
+```
+
+### ccli_dsatur
+
+```{sh}
+./lib/ccli_dsatur ../queen-colouring/queen16_16.col 1 1 42
+```
+
+### ccli_maxis
+
+```{sh}
+./lib/ccli_maxis ../queen-colouring/queen16_16.col 1 42
+```
