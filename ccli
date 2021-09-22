@@ -6,12 +6,9 @@
 #? There is NO WARRANTY, to the extent permitted by law.
 
 ##? Usage:
-##?      ccli bktdsat [options]  [--] <file>...
 ##?      ccli dsatur [options] [--] <file>...
 ##?      ccli greedy [options] [--] <file>...
-##?      ccli itrgrdy [options] [--] <file>...
 ##?      ccli maxis [options] [--] <file>...
-##?      ccli tabu [options] [--] <file>...
 ##?      ccli -h | --help
 ##?      ccli --version
 ##?
@@ -24,9 +21,9 @@
 ##?      --seed=<value>     Randomisation seed value. [default: 0]
 ##?      --type=<name>      Algorithm type. [default: simple]
 
-greedy=/home/matthew/workspace/ccli/bin/greedy.exp
-dsatur=/home/matthew/workspace/ccli/bin/dsatur.exp
-maxis=/home/matthew/workspace/ccli/bin/maxis.exp
+greedy=$(dirname "$0")/lib/ccli_greedy
+dsatur=$(dirname "$0")/lib/ccli_dsatur
+maxis=$(dirname "$0")/lib/ccli_maxis
 
 help=$(grep "^##?" "$0" | cut -c 5-)
 version=$(grep "^#?"  "$0" | cut -c 4-)
@@ -68,10 +65,6 @@ case $TYPE_S in
  *) TYPE=1 ;;
 esac
 
-if ${args[bktdsat]} ; then
- echo "BKTDSAT Algorithm."
-fi
-
 if ${args[dsatur]} ; then
  $dsatur ${args[<file>,0]} $CHEAT $ORDERING ${args[--seed]}
 fi
@@ -80,14 +73,6 @@ if ${args[greedy]} ; then
  $greedy ${args[<file>,0]} $CHEAT $KEMPE $ORDERING ${args[--seed]} $TYPE
 fi
 
-if ${args[itrgrdy]} ; then
- echo "ITRGRDY Algorithm."
-fi
-
 if ${args[maxis]} ; then
  $maxis ${args[<file>,0]} $CHEAT ${args[--seed]}
-fi
-
-if ${args[tabu]} ; then
- echo "Tabu Algorithm."
 fi
