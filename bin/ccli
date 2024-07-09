@@ -1,6 +1,6 @@
 #!/bin/bash
 #? ccli 0.1.0
-#? Copyright (C) 2014 Matthew Henderson
+#? Copyright (C) 2014 - 2024 Matthew Henderson
 #? License MIT
 #? This is free software: you are free to change and redistribute it.
 #? There is NO WARRANTY, to the extent permitted by law.
@@ -21,9 +21,9 @@
 ##?      --seed=<value>     Randomisation seed value. [default: 0]
 ##?      --type=<name>      Algorithm type. [default: simple]
 
-greedy=$(dirname "$0")/lib/ccli_greedy
-dsatur=$(dirname "$0")/lib/ccli_dsatur
-maxis=$(dirname "$0")/lib/ccli_maxis
+greedy=src/lib/ccli_greedy
+dsatur=src/lib/ccli_dsatur
+maxis=src/lib/ccli_maxis
 
 help=$(grep "^##?" "$0" | cut -c 5-)
 version=$(grep "^#?"  "$0" | cut -c 4-)
